@@ -3,7 +3,7 @@ import argparse
 import torch
 
 from diffusers import AnimateDiffPipeline, MotionAdapter, EulerDiscreteScheduler
-from diffusers.utils import export_to_video, expo
+from diffusers.utils import export_to_video
 from huggingface_hub import hf_hub_download
 from safetensors.torch import load_file
 
