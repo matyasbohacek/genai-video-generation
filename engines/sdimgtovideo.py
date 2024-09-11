@@ -2,25 +2,30 @@ import argparse
 import os
 
 import torch
-from diffusers import StableDiffusionPipeline, StableDiffusionImg2VidPipeline
+from diffusers import StableDiffusionPipeline, StableVideoDiffusionPipeline
+from diffusers.utils import export_to_video
 from PIL import Image
 
 
-# Load the pipes
+# Load the pipelines
 def load_pipelines():
-    # Load Stable Diffusion v3 for image generation
+    # Load Stable Diffusion for image generation
     sd_pipe = StableDiffusionPipeline.from_pretrained(
         "stabilityai/stable-diffusion-3",
         torch_dtype=torch.float16
     )
     sd_pipe = sd_pipe.to("cuda")
 
-    # Load Stable Video Diffusion for image-to-video generation
-    vid_pipe = StableDiffusionImg2VidPipeline.from_pretrained(
-        "stabilityai/stable-video-diffusion-img2vid-xt",
-        torch_dtype=torch.float16
+    # Load Stable Video Diffusion for video generation
+    vid_pipe = StableVideoDiffusionPipeline.from_pretrained(
+        "stabilityai/stable-video-diffusion-img2vid",
+        torch_dtype=torch.float16,
+        variant="fp16"
     )
-    vid_pipe = vid_pipe.to("cuda")
+
+    # Optimize for GPU use
+    vid_pipe.enable_model_cpu_offload()
+    vid_pipe.unet.enable_forward_chunking()
 
     return sd_pipe, vid_pipe
 
@@ -29,7 +34,7 @@ def generate_video(prompt: str, output_path: str):
     # Load the models
     sd_pipe, vid_pipe = load_pipelines()
 
-    # Step 1: Generate the base image using Stable Diffusion v3
+    # Step 1: Generate the base image using Stable Diffusion (Text to Image)
     print(f"Generating base image for prompt: {prompt}")
     base_image = sd_pipe(prompt).images[0]
 
@@ -37,20 +42,17 @@ def generate_video(prompt: str, output_path: str):
     base_image.save("base_image.png")
     print("Base image saved as base_image.png")
 
-    # Step 2: Generate the video using Stable Video Diffusion
+    # Resize the image for the video generation (expected input size)
+    base_image = base_image.resize((1024, 576))
+
+    # Step 2: Generate the video using the image (Image to Video)
     print("Generating video based on the base image...")
-    video_frames = vid_pipe(prompt, input_image=base_image).frames
+    generator = torch.manual_seed(42)  # For deterministic results
+    frames = vid_pipe(base_image, decode_chunk_size=2, generator=generator, num_frames=25).frames[0]
 
-    # Step 3: Save the generated video as a GIF
-    video_frames[0].save(
-        output_path,
-        save_all=True,
-        append_images=video_frames[1:],
-        duration=100,
-        loop=0
-    )
+    # Step 3: Save the generated video
+    export_to_video(frames, output_path, fps=7)
     print(f"Video saved as {output_path}")
-
     os.remove("base_image.png")
 
 
