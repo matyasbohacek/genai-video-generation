@@ -11,7 +11,7 @@ from PIL import Image
 def load_pipelines():
     # Load Stable Diffusion for image generation
     sd_pipe = StableDiffusionPipeline.from_pretrained(
-        "stabilityai/stable-diffusion-3",
+        "stabilityai/stable-diffusion-3-medium",
         torch_dtype=torch.float16
     )
     sd_pipe = sd_pipe.to("cuda")
