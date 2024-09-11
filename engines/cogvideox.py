@@ -14,7 +14,7 @@ pipe = CogVideoXPipeline.from_pretrained(
     device_map="balanced"
 )
 
-pipe.enable_model_cpu_offload()  # This helps reduce GPU memory usage.
+# pipe.enable_model_cpu_offload()  # This helps reduce GPU memory usage.
 pipe.vae.enable_tiling()         # Further reduce memory consumption.
 
 
