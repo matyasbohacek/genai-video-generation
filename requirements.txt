@@ -9,3 +9,4 @@ accelerate
 diffusers
 imageio-ffmpeg
 safetensors
+numpy==1.26.4
