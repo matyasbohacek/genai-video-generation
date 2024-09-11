@@ -11,7 +11,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 pipe = CogVideoXPipeline.from_pretrained(
     "THUDM/CogVideoX-2b",
     torch_dtype=torch.bfloat16,
-    device_map="auto"
+    device_map="balanced"
 )
 
 pipe.enable_model_cpu_offload()  # This helps reduce GPU memory usage.
