@@ -24,4 +24,10 @@ def generate_video(prompt: str, output_path: str):
 
 
 if __name__ == "__main__":
-    pass
+    parser = argparse.ArgumentParser(description="Generate a video from a prompt")
+    parser.add_argument('--prompt', type=str, required=True, help='The prompt for video generation')
+    parser.add_argument('--output_path', type=str, required=True, help='The path to save the generated video')
+
+    args = parser.parse_args()
+
+    generate_video(args.prompt, args.output_path)
