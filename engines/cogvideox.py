@@ -7,7 +7,7 @@ from diffusers.utils import export_to_video
 
 
 pipe = CogVideoXPipeline.from_pretrained(
-    "THUDM/CogVideoX-5b",
+    "THUDM/CogVideoX-2b",
     torch_dtype=torch.bfloat16
 )
 
