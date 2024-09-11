@@ -2,7 +2,7 @@ import argparse
 import os
 
 import torch
-from diffusers import StableDiffusionPipeline, StableVideoDiffusionPipeline
+from diffusers import StableDiffusion3Pipeline, StableVideoDiffusionPipeline
 from diffusers.utils import export_to_video
 from PIL import Image
 
@@ -10,7 +10,7 @@ from PIL import Image
 # Load the pipelines
 def load_pipelines():
     # Load Stable Diffusion for image generation
-    sd_pipe = StableDiffusionPipeline.from_pretrained(
+    sd_pipe = StableDiffusion3Pipeline.from_pretrained(
         "stabilityai/stable-diffusion-3-medium-diffusers",
         torch_dtype=torch.float16
     )
