@@ -2,7 +2,7 @@
 
 ## Setup
 
-Conda enviornment with Python TBD; packages from `requirements.txt` installed.
+Conda enviornment with Python 3.10; packages from `requirements.txt` installed.
 
 ## Supported Engines
 
