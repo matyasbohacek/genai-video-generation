@@ -1,0 +1,10 @@
+# diffusers>=0.30.1
+# transformers>=4.44.2
+# accelerate>=0.33.0 (suggest install from source)
+# imageio-ffmpeg>=0.5.1
+
+torch==1.13.1
+transformers
+accelerate
+diffusers
+imageio-ffmpeg
