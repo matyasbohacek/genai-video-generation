@@ -3,7 +3,7 @@ import argparse
 import torch
 
 from diffusers import AnimateDiffPipeline, MotionAdapter, EulerDiscreteScheduler
-from diffusers.utils import export_to_video
+from diffusers.utils import export_to_video, export_to_gif
 from huggingface_hub import hf_hub_download
 from safetensors.torch import load_file
 
@@ -20,7 +20,7 @@ pipe.scheduler = EulerDiscreteScheduler.from_config(pipe.scheduler.config, times
 
 def generate_video(prompt: str, output_path: str):
     output = pipe(prompt=prompt, guidance_scale=1.0, num_inference_steps=4)
-    export_to_video(output.frames[0], output_path, fps=8)
+    export_to_gif(output.frames[0], output_path, fps=8)
 
 
 if __name__ == "__main__":
