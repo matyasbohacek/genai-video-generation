@@ -53,9 +53,9 @@ if __name__ == "__main__":
     parser.add_argument('--output_directory', type=str, required=True, help='Directory to store generated videos')
     parser.add_argument('--engine', type=str, required=True, choices=['bytedance', 'cogvideox', 'sdimgtovideo'],
                         help='Engine to use for generation')
-    parser.add_argument('--class_name_col', type=str, required=True, help='Column name for class names in the CSV')
-    parser.add_argument('--prompt_col', type=str, required=True, help='Column name for prompts in the CSV')
-    parser.add_argument('--num_vids_per_class', type=int, required=True, help='Number of videos to generate per class')
+    parser.add_argument('--class_name_col', type=str, default="id", help='Column name for class names in the CSV')
+    parser.add_argument('--prompt_col', type=str, default="name", help='Column name for prompts in the CSV')
+    parser.add_argument('--num_vids_per_class', type=int, default=1, help='Number of videos to generate per class')
 
     args = parser.parse_args()
 
