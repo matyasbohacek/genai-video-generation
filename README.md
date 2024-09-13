@@ -22,7 +22,7 @@ Two deployment options are supported and documented: local deployment and Colab 
 
 ### Colab Deployment
 
-Open [this Colab]() to get started; instructions are included. 
+Open [this Colab](https://colab.research.google.com/drive/1GtC5MI4gD2-b-JkQDefvgu6LMO9fsuZU?usp=sharing) to get started; instructions are included. 
 
 ## Inference
 
