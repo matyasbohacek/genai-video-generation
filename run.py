@@ -27,7 +27,7 @@ def run_batch_generation(prompt_csv, output_directory, engine, class_name_col, p
         os.makedirs(output_directory)
 
     # Load the prompt CSV into a dataframe
-    df = pd.read_csv(prompt_csv)
+    df = pd.read_csv(prompt_csv, index_col=False)
 
     # Iterate over the dataframe and generate videos for each class
     for index, row in df.iterrows():
