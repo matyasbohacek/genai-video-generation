@@ -29,5 +29,7 @@ Open [this Colab]() to get started; instructions are included.
 From the `engines` directory, with your Conda environment activated, run the selected model with `--prompt` and `--output_path` parameters. You can choose among `bytedanceanimatediff.py`, `cogvideox.py`, `sdimgtovideo.py`, each wrapping an individual model. Here's an example command:
 
 ```shell
-python bytedanceanimatediff.py --prompt "a pickup truck on a highway with an American flag" --output_path "my-dream-car.mp4"
+python bytedanceanimatediff.py \
+  --prompt "a pickup truck on a highway with an American flag" \
+  --output_path "my-dream-car.mp4"
 ```
