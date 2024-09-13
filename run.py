@@ -67,5 +67,3 @@ if __name__ == "__main__":
         prompt_col=args.prompt_col,
         num_vids_per_class=args.num_vids_per_class
     )
-
-
