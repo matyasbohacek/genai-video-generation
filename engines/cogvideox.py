@@ -22,7 +22,7 @@ def generate_video(prompt: str, output_path: str):
         num_inference_steps=50,
         num_frames=49,
         guidance_scale=6,
-        generator=torch.Generator(device="cuda").manual_seed(42),
+        generator=torch.Generator(device="cuda"),
     ).frames[0]
 
     export_to_video(video, output_path, fps=8)
