@@ -47,8 +47,7 @@ def generate_video(prompt: str, output_path: str):
     # Step 2: Generate the video using the image (Image to Video)
     print("Generating video based on the base image...")
     vid_pipe = load_vid_pipeline()
-    generator = torch  # For deterministic results
-    frames = vid_pipe(base_image, decode_chunk_size=2, generator=generator, num_frames=25).frames[0]
+    frames = vid_pipe(base_image, decode_chunk_size=2, num_frames=25).frames[0]
     vid_pipe.to("cpu")  # Move the video pipeline to CPU to free up GPU memory
     del vid_pipe  # Optionally delete the pipeline to free memory completely
     torch.cuda.empty_cache()  # Clear the cache
