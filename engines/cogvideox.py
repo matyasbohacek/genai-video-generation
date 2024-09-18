@@ -11,6 +11,7 @@ pipe = CogVideoXPipeline.from_pretrained(
     torch_dtype=torch.bfloat16
 )
 
+pipe.to("cuda")
 pipe.enable_model_cpu_offload()
 pipe.vae.enable_tiling()
 
@@ -21,8 +22,7 @@ def generate_video(prompt: str, output_path: str):
         num_videos_per_prompt=1,
         num_inference_steps=50,
         num_frames=49,
-        guidance_scale=6,
-        generator=torch.Generator(device="cuda"),
+        guidance_scale=6
     ).frames[0]
 
     export_to_video(video, output_path, fps=8)
