@@ -1,6 +1,6 @@
 # GenAI Video Generation
 
-This repository contains open-source text-to-video model wrappers, simplifying their inference to a single, standardized function.
+This repository contains open-source text-to-video model wrappers, simplifying their inference to a single, standardized interface.
 
 ## Models
 
